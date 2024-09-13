@@ -23,7 +23,7 @@ class CityView(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         qs = self.filter_queryset(
-            self.queryset.filter(isActive=True).order_by('name'))
+            self.queryset.order_by('name'))
         serializer = CitySerializer(qs, many=True)
         return Response(serializer.data)
 

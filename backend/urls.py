@@ -26,8 +26,9 @@ class HomeView(APIView):
         return Response({
             'message': 'Welcome to GetVilla API',
             'endpoints': [
-                '/users/',
                 '/csc/',
+                '/places/',
+                '/users/',
             ]
         })
 
@@ -42,5 +43,6 @@ urlpatterns = [
          cache_timeout=0), name='schema-redoc'),
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
+    path("places/", include("places.urls")),
     path("csc/", include("csc.urls")),
 ]

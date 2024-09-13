@@ -12,7 +12,7 @@ class StayWiseUserSerializer(ModelSerializer):
 
     class Meta:
         model = StayWiseUser
-        fields = ['id', 'username', 'email', 'firstName', 'lastName', 'gender', 'dateOfBirth', 'city', 'phoneNumber', 'profilePicture', 'cityName']
+        fields = ['id', 'email', 'firstName', 'lastName', 'gender', 'dateOfBirth', 'city', 'phoneNumber', 'profilePicture', 'cityName']
         list_fields = fields
         get_fields = fields
 

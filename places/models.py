@@ -8,6 +8,9 @@ class Views(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, unique=True, verbose_name='ID', default=uuid.uuid4)
     name = models.CharField(max_length=100, verbose_name='Name')
 
+    class Meta:
+        verbose_name_plural = "Views"
+
     def __str__(self):
         return self.name
 
@@ -31,8 +34,8 @@ class Place(models.Model):
     is_available = models.BooleanField(verbose_name='Is Available', default=False)
     is_self_check_in = models.BooleanField(verbose_name='Is Self Check In', default=False)
     is_pet_friendly = models.BooleanField(verbose_name='Is Pet Friendly', default=False)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At', editable=False)
-    updated_at =  models.DateTimeField(auto_now=True, verbose_name='Updated At', editable=False)
+    createdAt = models.DateTimeField(auto_now_add=True, verbose_name='Created At', editable=False)
+    updatedAt =  models.DateTimeField(auto_now=True, verbose_name='Updated At', editable=False)
 
     def __str__(self):
         return self.name
