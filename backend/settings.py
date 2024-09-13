@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'csc',
     'places',
+    'reservation',
     'users'
 ]
 
