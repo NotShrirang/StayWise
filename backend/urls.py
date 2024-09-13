@@ -28,6 +28,7 @@ class HomeView(APIView):
             'endpoints': [
                 '/csc/',
                 '/places/',
+                '/reservation/',
                 '/users/',
             ]
         })
@@ -42,7 +43,9 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc',
          cache_timeout=0), name='schema-redoc'),
     path("admin/", admin.site.urls),
-    path("users/", include("users.urls")),
-    path("places/", include("places.urls")),
     path("csc/", include("csc.urls")),
+    path("places/", include("places.urls")),
+    path("reservation/", include("reservation.urls")),
+    path("users/", include("users.urls")),
+    
 ]
