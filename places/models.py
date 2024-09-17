@@ -43,3 +43,5 @@ class Place(models.Model):
     class Meta:
         verbose_name = 'Place'
         verbose_name_plural = 'Places'
+        db_table = 'staywise_place'
+        managed = True

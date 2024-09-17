@@ -1,10 +1,35 @@
-from users.models import StayWiseUser
+from users.models import StayWiseUser, ReservationUser
 import requests
 from django.contrib import auth
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.serializers import ModelSerializer, CharField, SerializerMethodField, Serializer, ValidationError
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
+
+
+class ReservationUserSerializer(ModelSerializer):
+    userName = SerializerMethodField()
+    reservationPlace = SerializerMethodField()
+    reservationStartDate = SerializerMethodField()
+    reservationEndDate = SerializerMethodField()
+
+    class Meta:
+        model = ReservationUser
+        fields = ['id', 'user', 'reservation', 'userType', 'registerdAt', 'userName', 'reservationPlace', 'reservationStartDate', 'reservationEndDate']
+
+
+    def get_userName(self, obj):
+        return obj.user.firstName + " " + obj.user.lastName
+    
+    def get_reservationPlace(self, obj):
+        return obj.reservation.place.name
+    
+    def get_reservationStartDate(self, obj):
+        return obj.reservation.start_datetime
+    
+    def get_reservationEndDate(self, obj):
+        return obj.reservation.end_datetime
+    
 
 
 class StayWiseUserSerializer(ModelSerializer):

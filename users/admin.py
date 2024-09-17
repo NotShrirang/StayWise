@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import StayWiseUser
+from .models import StayWiseUser, ReservationUser
 
 
 @admin.register(StayWiseUser)
@@ -40,3 +40,9 @@ class StayWiseUserAdmin(admin.ModelAdmin):
         'is_superuser',
     )
     raw_id_fields = ('groups', 'user_permissions')
+
+
+@admin.register(ReservationUser)
+class ReservationUserAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'reservation', 'userType', 'registeredAt')
+    list_filter = ('user', 'reservation', 'registeredAt')

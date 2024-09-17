@@ -7,6 +7,7 @@ from users.views import (
     StayWiseUserRegisterView,
     StayWiseUserLoginView,
     StayWiseUserLogoutView,
+    ReservationUserView,
 )
 from rest_framework_simplejwt.views import (
     TokenRefreshView
@@ -21,19 +22,16 @@ class HomeView(APIView):
                 '/login/',
                 '/register/',
                 '/logout/',
-                '/check-email/',
                 '/token/refresh/',
                 '/users/',
-                '/students/',
-                '/alumni/',
-                '/faculty/',
-                '/super-admin/'
+                '/reservation-users/',
             ]
         })
 
 
 router = SimpleRouter()
 router.register(r'users', StayWiseUserView, basename='users')
+router.register(r'reservation-users', ReservationUserView, basename='reservation-users')
 
 urlpatterns = [
     path('', HomeView.as_view(), name="homeview"),

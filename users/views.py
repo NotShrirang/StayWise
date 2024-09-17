@@ -1,11 +1,13 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status, views
-from rest_framework import generics, permissions, pagination
+from rest_framework import generics, permissions, pagination, filters
 from django.db import transaction
+from django_filters.rest_framework import DjangoFilterBackend
 
-from users.serializers import StayWiseUserSerializer, LoginSerializer, UpdatePasswordSerializer, RegisterSerializer, LogoutSerializer
-from  users.models import StayWiseUser
+
+from users.serializers import StayWiseUserSerializer, ReservationUserSerializer, LoginSerializer, UpdatePasswordSerializer, RegisterSerializer, LogoutSerializer
+from  users.models import StayWiseUser, ReservationUser
 
 class StayWiseUserRegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -121,3 +123,13 @@ class StayWiseUserView(ModelViewSet):
             return Response({
                 "error": "user not found"
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class ReservationUserView(ModelViewSet):
+    queryset = ReservationUser.objects.all()
+    serializer_class = ReservationUserSerializer
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['reservation', 'reservation__place', 'user']
+    search_fields = ['reservation__place__name', 'user__name']
+    ordering_fields = ['reservation__start_datetime', 'reservation__end_datetime', 'registeredAt']
+    ordering = ['reservation__start_datetime']
