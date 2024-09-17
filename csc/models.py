@@ -9,7 +9,10 @@ class Country(models.Model):
         return self.name
 
     class Meta:
+        verbose_name = "Country"
         verbose_name_plural = "Countries"
+        db_table = "country"
+        managed = True
 
 
 class State(models.Model):
@@ -20,7 +23,10 @@ class State(models.Model):
         return self.name
     
     class Meta:
+        verbose_name = "State"
         verbose_name_plural = "States"
+        db_table = "state"
+        managed = True
     
 
 class City(models.Model):
@@ -31,4 +37,7 @@ class City(models.Model):
         return self.name
 
     class Meta:
+        verbose_name = "City"
         verbose_name_plural = "Cities"
+        db_table = "city"
+        managed = True

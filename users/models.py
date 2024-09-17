@@ -72,4 +72,29 @@ class StayWiseUser(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         verbose_name = 'StayWiseUser'
+        verbose_name_plural = 'StayWiseUsers'
         db_table = 'staywise_user'
+        managed = True
+
+
+class ReservationUser(models.Model):
+    USER_TYPES_CHOICES = (
+        ('host', 'Host'),
+        ('guest', 'Guest'),
+    )
+
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    user = models.ForeignKey(StayWiseUser, on_delete=models.CASCADE, related_name='reservations')
+    reservation = models.ForeignKey('reservation.Reservation', on_delete=models.CASCADE, related_name='users')
+    userType = models.CharField(
+        max_length=5,
+        choices=USER_TYPES_CHOICES,
+        default='guest'
+    )
+    registeredAt = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Reservation User"
+        verbose_name_plural = "Reservation Users"
+        db_table = "reservation_user"
+        managed = True
