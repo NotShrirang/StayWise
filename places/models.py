@@ -21,7 +21,7 @@ class Place(models.Model):
     owner = models.ForeignKey(StayWiseUser, on_delete=models.CASCADE, verbose_name='Owner')
     display_image = models.FileField(upload_to='images/', verbose_name='Display Image')
     address = models.CharField(max_length=250, verbose_name='address')
-    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Village')
+    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='City')
     price = models.IntegerField(verbose_name='Price')
     rating = models.FloatField(verbose_name='Rating')
     guest_capacity = models.IntegerField(verbose_name='Guest Capacity')
@@ -44,4 +44,22 @@ class Place(models.Model):
         verbose_name = 'Place'
         verbose_name_plural = 'Places'
         db_table = 'staywise_place'
+        managed = True
+
+
+class PlaceImage(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, unique=True, verbose_name='ID', default=uuid.uuid4)
+    image = models.ImageField(verbose_name="Image", upload_to="images/place_images/")
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="images", verbose_name="Place")
+    uploader = models.ForeignKey(StayWiseUser, on_delete=models.SET_NULL, related_name="placeImages", verbose_name="Image Uploader", null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True, verbose_name='Created At', editable=False)
+    updatedAt =  models.DateTimeField(auto_now=True, verbose_name='Updated At', editable=False)
+
+    def __str__(self):
+        return f"{self.place.name}--{self.id}"
+
+    class Meta:
+        verbose_name = 'Place Image'
+        verbose_name_plural = 'Place Images'
+        db_table = 'staywise_place_image'
         managed = True
