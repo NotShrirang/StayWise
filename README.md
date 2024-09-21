@@ -67,4 +67,4 @@ To run StayWise locally, follow these steps:
 We welcome contributions! To contribute, fork the repository and create a pull request. Please make sure your changes are well-documented and pass all tests.
 
 ### License
-StayWise is licensed under the MIT License. See LICENSE for more information.
+StayWise is licensed under the GPLv3 License. See LICENSE for more information.
