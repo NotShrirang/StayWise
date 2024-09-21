@@ -1,6 +1,6 @@
 from  utils.filters import DateFilter
 
-from .models import Place, Views
+from .models import Place, PlaceImage, Views
 
 
 class PlaceFilter(DateFilter):
@@ -20,4 +20,14 @@ class PlaceFilter(DateFilter):
             'is_available',
             'is_self_check_in',
             'is_pet_friendly',
+        )
+
+
+class PlaceImageFilter(DateFilter):
+    class Meta:
+        model = PlaceImage
+        fields = (
+            'createdAt',
+            'updatedAt',
+            'place',
         )

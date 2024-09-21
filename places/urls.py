@@ -1,5 +1,6 @@
 from places.views import (
-    PlaceView
+    PlaceView,
+    PlaceImageView
 )
 from django.urls import path
 from rest_framework.routers import SimpleRouter
@@ -11,12 +12,14 @@ class HomeView(APIView):
         return Response({
             'message': 'Welcome to StayWise Places API',
             'endpoints': [
-                '/places/'
+                '/places/',
+                '/place-images/'
             ]
         })
 
 router = SimpleRouter()
 router.register('places', PlaceView, basename='places')
+router.register('place-images', PlaceImageView, basename='place-images')
 
 urlpatterns = [
     path('', HomeView.as_view()),

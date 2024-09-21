@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import Views, Place
+from .models import Views, Place, PlaceImage
 
 
 @admin.register(Views)
@@ -47,3 +47,16 @@ class PlaceAdmin(admin.ModelAdmin):
     )
     raw_id_fields = ('views',)
     search_fields = ('name',)
+
+
+@admin.register(PlaceImage)
+class PlaceImageAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'image',
+        'place',
+        'uploader',
+        'createdAt',
+        'updatedAt',
+    )
+    list_filter = ('place', 'uploader', 'createdAt', 'updatedAt')

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from places.models import Place, Views
+from places.models import Place, Views, PlaceImage
 
 
 class ViewsSerializer(serializers.ModelSerializer):
@@ -34,3 +34,18 @@ class PlaceSerializer(serializers.ModelSerializer):
     
     def get_owner_phoneNumber(self, obj):
         return obj.owner.phoneNumber
+
+
+class PlaceImageSerializer(serializers.ModelSerializer):
+    placeName = serializers.SerializerMethodField()
+    uploaderName = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PlaceImage
+        fields = ['id', 'image', 'place', 'placeName', 'uploader', 'uploaderName', 'createdAt', 'updatedAt']
+
+    def get_placeName(self, obj):
+        return obj.place.name
+    
+    def get_uploaderName(self, obj):
+        return obj.uploader.firstName + " " + obj.uploader.lastName
