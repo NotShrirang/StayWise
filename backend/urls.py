@@ -9,9 +9,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="GetVilla API",
+        title="StayWise API",
         default_version='v1',
-        description="A temparory API documentation for GetVilla API",
+        description="A temparory API documentation for StayWise API",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
@@ -24,7 +24,7 @@ schema_view = get_schema_view(
 class HomeView(APIView):
     def get(self, request):
         return Response({
-            'message': 'Welcome to GetVilla API',
+            'message': 'Welcome to StayWise API',
             'endpoints': [
                 '/csc/',
                 '/places/',
